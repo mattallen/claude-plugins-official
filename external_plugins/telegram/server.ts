@@ -403,8 +403,8 @@ mcp.setNotificationHandler(
     const text = `🔐 Permission: ${tool_name}`
     const keyboard = new InlineKeyboard()
       .text('See more', `perm:more:${request_id}`)
-      .text('✅ Yes', `perm:allow:${request_id}`)
-      .text('❌ No', `perm:deny:${request_id}`)
+      .text('✅ Allow', `perm:allow:${request_id}`)
+      .text('❌ Deny', `perm:deny:${request_id}`)
     for (const chat_id of access.allowFrom) {
       void bot.api.sendMessage(chat_id, text, { reply_markup: keyboard }).catch(e => {
         process.stderr.write(`permission_request send to ${chat_id} failed: ${e}\n`)
@@ -724,8 +724,8 @@ bot.on('callback_query:data', async ctx => {
       `description: ${description}\n` +
       `input_preview:\n${prettyInput}`
     const keyboard = new InlineKeyboard()
-      .text('✅ Yes', `perm:allow:${request_id}`)
-      .text('❌ No', `perm:deny:${request_id}`)
+      .text('✅ Allow', `perm:allow:${request_id}`)
+      .text('❌ Deny', `perm:deny:${request_id}`)
     await ctx.editMessageText(expanded, { reply_markup: keyboard }).catch(() => {})
     await ctx.answerCallbackQuery().catch(() => {})
     return

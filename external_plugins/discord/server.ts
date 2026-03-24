@@ -492,12 +492,12 @@ mcp.setNotificationHandler(
         .setStyle(ButtonStyle.Secondary),
       new ButtonBuilder()
         .setCustomId(`perm:allow:${request_id}`)
-        .setLabel('Yes')
+        .setLabel('Allow')
         .setEmoji('✅')
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId(`perm:deny:${request_id}`)
-        .setLabel('No')
+        .setLabel('Deny')
         .setEmoji('❌')
         .setStyle(ButtonStyle.Danger),
     )
@@ -773,12 +773,12 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
         .setCustomId(`perm:allow:${request_id}`)
-        .setLabel('Yes')
+        .setLabel('Allow')
         .setEmoji('✅')
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId(`perm:deny:${request_id}`)
-        .setLabel('No')
+        .setLabel('Deny')
         .setEmoji('❌')
         .setStyle(ButtonStyle.Danger),
     )
