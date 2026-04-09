@@ -1014,6 +1014,18 @@
       "homepage": "https://www.accoil.com/product-tracking"
     },
     {
+      "name": "pydantic-ai",
+      "description": "Write accurate Pydantic AI code from the start. Up-to-date patterns, decision trees, and common gotchas for agents, tools, structured output, streaming, and multi-agent apps.",
+      "category": "development",
+      "source": {
+        "source": "git-subdir",
+        "url": "pydantic/skills",
+        "path": "plugins/ai",
+        "ref": "main"
+      },
+      "homepage": "https://github.com/pydantic/skills/tree/main/plugins/ai"
+    },
+    {
       "name": "pyright-lsp",
       "description": "Python language server (Pyright) for type checking and code intelligence",
       "version": "1.0.0",
