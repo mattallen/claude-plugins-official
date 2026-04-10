@@ -61,9 +61,9 @@
   #meta-line { color: var(--subtle); font-size: 11px; }
 
   #hero { margin: 14px 0 6px; }
-  #hero-total { font-size: 56px; font-weight: 700; line-height: 1; }
+  #hero-total { font-size: 36px; font-weight: 700; line-height: 1; }
   #hero-total .unit { color: var(--clay); }
-  #hero-total .label { font-size: 18px; font-weight: 400; color: var(--dim); margin-left: 8px; }
+  #hero-total .label { font-size: 14px; font-weight: 400; color: var(--dim); margin-left: 8px; }
   #hero-split { color: var(--dim); margin-top: 8px; }
   #hero-split b { color: var(--term-fg); font-weight: 500; }
   #hero-split .ok { color: var(--green); }
@@ -213,7 +213,7 @@
   @media (max-width: 760px) {
     body { padding: 20px 12px 48px; }
     .term-body { padding: 16px 16px 24px; }
-    #hero-total { font-size: 40px; }
+    #hero-total { font-size: 28px; }
     .bar { grid-template-columns: 14ch 1fr 7ch; gap: 8px; }
     .drill summary { grid-template-columns: 6ch 1fr; }
     .drill .body { padding-left: 12px; }
@@ -345,6 +345,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c =>
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const short = p => String(p||'').replace(/^-Users-[^-]+-/,'').replace(/^code-/,'');
+  const sid = s => String(s||'').slice(0,8);
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const niceDate = iso => { const d = new Date(iso); return isNaN(d) ? '' :
     `${MON[d.getMonth()]} ${d.getDate()} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
@@ -359,8 +360,7 @@
   $('cmd-flags').innerHTML = DATA.since
     ? `<span class="flag">--since</span> ${esc(DATA.since)}` : '';
   $('meta-line').textContent =
-    (span ? `${span.from.slice(0,10)} → ${span.to.slice(0,10)}` : '') +
-    ` · ${DATA.root || ''}`;
+    span ? `${span.from.slice(0,10)} → ${span.to.slice(0,10)}` : '';
   $('foot-gen').textContent = `generated ${DATA.generated_at?.slice(0,16).replace('T',' ') || ''}`;
   $('foot-stats').textContent =
     `${o.sessions} sessions · ${o.api_calls} api calls · ${o.human_messages} prompts`;
@@ -370,8 +370,9 @@
     `${m?m[1]:num}<span class="unit">${m?m[2]:''}</span><span class="label">tokens</span>`;
   const cacheCls = it.pct_cached>=85 ? 'ok' : 'warn';
   $('hero-split').innerHTML =
-    `<b>${fmt(it.total)}</b> input <span class="${cacheCls}">(${it.pct_cached}% cache-read)</span> · `+
-    `<b>${fmt(o.output_tokens)}</b> output · all figures below are % of this total`;
+    `<b>${pct(it.total,GRAND)}</b> input · `+
+    `<span class="${cacheCls}"><b>${it.pct_cached}%</b> of input cached</span> · `+
+    `<b>${pct(o.output_tokens,GRAND)}</b> output`;
 
   // overall stat grid
   $('overall-grid').innerHTML = [
@@ -498,7 +499,8 @@
     return `<details><summary>`+
       `<span class="amt">${share(p.total_tokens)}</span>`+
       `<span class="desc">${esc(p.text)}</span>`+
-      `<span class="meta">${niceDate(p.ts)} · ${esc(short(p.project))} · ${p.api_calls} calls`+
+      `<span class="meta">${niceDate(p.ts)} · ${esc(short(p.project))} · `+
+        `sess <code>${esc(sid(p.session))}</code> · ${p.api_calls} calls`+
         (p.subagent_calls?` · ${p.subagent_calls} subagents`:'')+
         ` · ${pct(p.input.cache_read,inTot)} cached</span>`+
       `</summary><div class="body">`+
@@ -514,7 +516,8 @@
     `<span class="amt">${fmt(b.uncached)}</span>`+
     `<span class="desc">${esc(short(b.project))} · `+
       `${b.kind==='subagent'?esc(b.agentType||'subagent'):'main'}</span>`+
-    `<span class="meta">${niceDate(b.ts)} · ${pct(b.uncached,b.total)} of ${fmt(b.total)} uncached</span>`+
+    `<span class="meta">${niceDate(b.ts)} · sess <code>${esc(sid(b.session))}</code> · `+
+      `${pct(b.uncached,b.total)} of ${fmt(b.total)} uncached</span>`+
     `</summary><div class="body">`+
     renderContext(b.context,
       `<div class="ctx-break"><b>${fmt(b.uncached)}</b> uncached `+
@@ -562,7 +565,8 @@
   ];
   table($('tbl-projects'), statCols, statRows(DATA.by_project));
   table($('tbl-subagents'), statCols, statRows(DATA.by_subagent_type));
-  table($('tbl-skills'), statCols, statRows(DATA.by_skill));
+  table($('tbl-skills'), statCols.slice(0,8),
+    statRows(DATA.by_skill).map(r=>r.slice(0,8)));
 })();
 </script>
 </body>
