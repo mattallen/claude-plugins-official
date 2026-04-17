@@ -936,28 +936,8 @@
       "homepage": "https://github.com/netlify/context-and-tools"
     },
     {
-      "name": "netsuite-aiconnector-service-skill",
-      "description": "NetSuite Intelligence skill — teaches AI the correct tool-selection order, output formatting, domain knowledge, multi-subsidiary and currency handling, and SuiteQL safety checklist for any session using the NetSuite AI Service Connector.",
-      "author": {
-        "name": "Oracle NetSuite"
-      },
-      "category": "productivity",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/oracle/netsuite-suitecloud-sdk.git",
-        "path": "packages/agent-skills",
-        "ref": "master",
-        "sha": "43bacf43763e1eedd0892b4652be3d45df94f0e7"
-      },
-      "homepage": "https://github.com/oracle/netsuite-suitecloud-sdk",
-      "strict": false,
-      "skills": [
-        "./netsuite-ai-connector-instructions"
-      ]
-    },
-    {
-      "name": "netsuite-sdf-roles-and-permissions",
-      "description": "Use when generating or reviewing NetSuite SDF permission configurations — customrole XML, script deployment permissions, permkey values, permlevel choices, run-as role design, and least-privilege access. Confirms exact ADMI_/LIST_/REGT_/REPO_/TRAN_ permission IDs and validates permissions against bundled NetSuite reference data.",
+      "name": "netsuite-suitecloud",
+      "description": "NetSuite agent skills from Oracle — authoring guidance for SuiteCloud Development Framework (SDF) objects and UIF single-page-app components, plus runtime guidance for the NetSuite AI Service Connector.",
       "author": {
         "name": "Oracle NetSuite"
       },
@@ -969,31 +949,13 @@
         "ref": "master",
         "sha": "43bacf43763e1eedd0892b4652be3d45df94f0e7"
       },
-      "homepage": "https://github.com/oracle/netsuite-suitecloud-sdk",
       "strict": false,
       "skills": [
-        "./netsuite-sdf-roles-and-permissions"
-      ]
-    },
-    {
-      "name": "netsuite-uif-spa-reference",
-      "description": "Use when building, modifying, or debugging NetSuite UIF SPA components. Provides API/type lookup for @uif-js/core and @uif-js/component — constructors, methods, props, enums, hooks, and component options.",
-      "author": {
-        "name": "Oracle NetSuite"
-      },
-      "category": "development",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/oracle/netsuite-suitecloud-sdk.git",
-        "path": "packages/agent-skills",
-        "ref": "master",
-        "sha": "43bacf43763e1eedd0892b4652be3d45df94f0e7"
-      },
-      "homepage": "https://github.com/oracle/netsuite-suitecloud-sdk",
-      "strict": false,
-      "skills": [
+        "./netsuite-ai-connector-instructions",
+        "./netsuite-sdf-roles-and-permissions",
         "./netsuite-uif-spa-reference"
-      ]
+      ],
+      "homepage": "https://github.com/oracle/netsuite-suitecloud-sdk"
     },
     {
       "name": "nightvision",
