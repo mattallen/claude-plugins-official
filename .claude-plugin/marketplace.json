@@ -348,6 +348,19 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management"
     },
     {
+      "name": "cloud-sql-postgresql",
+      "description": "Create, connect, and interact with a Cloud SQL for PostgreSQL database and data.",
+      "author": {
+        "name": "Google LLC"
+      },
+      "category": "database",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/gemini-cli-extensions/cloud-sql-postgresql.git"
+      },
+      "homepage": "https://cloud.google.com/sql"
+    },
+    {
       "name": "cloudflare",
       "source": {
         "source": "url",
