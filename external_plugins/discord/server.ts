@@ -445,11 +445,12 @@ const mcp = new Server(
       experimental: {
         'claude/channel': {},
         // Permission-relay opt-in (anthropics/claude-cli-internal#23061).
-        // Declaring this asserts we authenticate the replier — which we do:
-        // gate()/access.allowFrom already drops non-allowlisted senders before
-        // handleInbound runs. A server that can't authenticate the replier
-        // should NOT declare this.
-        'claude/channel/permission': {},
+        // Disabled in this fork: Claude Code emits permission_request to channels
+        // in parallel with PermissionRequest hooks, so an auto-allow hook still
+        // posts a Discord card that becomes orphan noise (no PermissionResolved
+        // event for the plugin to clean up). Re-enable by uncommenting once
+        // Claude Code suppresses channel relay on hook `allow`.
+        // 'claude/channel/permission': {},
       },
     },
     instructions: [
